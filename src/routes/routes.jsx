@@ -11,7 +11,7 @@ import {
 import App from "../App";
 import AuthLayout from "../components/AuthLayout";
 
-const router = [
+export const router = [
   {
     path: "/",
     element: <App />,
@@ -41,6 +41,30 @@ const router = [
         element: (
           <AuthLayout authentication={true}>
             <AllPosts />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/add-post",
+        element: (
+          <AuthLayout authentication={true}>
+            <AddPost />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/edit-post/:slug",
+        element: (
+          <AuthLayout authentication={true}>
+            <EditPost />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/post/:slug",
+        element: (
+          <AuthLayout authentication={true}>
+            <Post />
           </AuthLayout>
         ),
       },
