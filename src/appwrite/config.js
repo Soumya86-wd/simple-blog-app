@@ -31,11 +31,15 @@ export class Service {
 
   async getActivePosts(queries = [Query.equal("status", ["active"])]) {
     try {
-      return await this.databases.listDocuments(
+      const response = await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         queries
       );
+
+      // appwrite return an array of documents for queries
+      // the array can be accessed via response.documents
+      return response.documents;
     } catch (error) {
       console.error("Appwrite Service :: getActivePosts :: ", error);
       return null;

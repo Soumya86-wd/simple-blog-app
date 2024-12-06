@@ -14,9 +14,9 @@ function Post() {
 
   useEffect(async () => {
     if (slug) {
-      const displayPost = await appwriteService.getPostBySlug(slug);
-      if (post) {
-        setPost(displayPost);
+      const retrievedPost = await appwriteService.getPostBySlug(slug);
+      if (retrievedPost) {
+        setPost(retrievedPost);
       } else {
         navigate("/");
       }
