@@ -11,63 +11,34 @@ import {
 import App from "../App";
 import { AuthLayout } from "../components";
 
+const protectedRoutes = [
+  { path: "all-posts", element: <AllPosts /> },
+  { path: "add-post", element: <AddPost /> },
+  { path: "edit-post/:slug", element: <EditPost /> },
+  { path: "post/:slug", element: <Post /> },
+];
+
+const openRoutes = [
+  { path: "login", element: <Login /> },
+  { path: "signup", element: <Signup /> },
+];
+
 export const routerStrategy = [
   {
     path: "/",
     element: <App />,
     children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "/login",
+      { index: true, element: <Home /> },
+      ...openRoutes.map((route) => ({
+        ...route,
         element: (
-          <AuthLayout authentication={false}>
-            <Login />
-          </AuthLayout>
+          <AuthLayout authentication={false}>{route.element}</AuthLayout>
         ),
-      },
-      {
-        path: "/signup",
-        element: (
-          <AuthLayout authentication={false}>
-            <Signup />
-          </AuthLayout>
-        ),
-      },
-      {
-        path: "/all-posts",
-        element: (
-          <AuthLayout authentication={true}>
-            <AllPosts />
-          </AuthLayout>
-        ),
-      },
-      {
-        path: "/add-post",
-        element: (
-          <AuthLayout authentication={true}>
-            <AddPost />
-          </AuthLayout>
-        ),
-      },
-      {
-        path: "/edit-post/:slug",
-        element: (
-          <AuthLayout authentication={true}>
-            <EditPost />
-          </AuthLayout>
-        ),
-      },
-      {
-        path: "/post/:slug",
-        element: (
-          <AuthLayout authentication={true}>
-            <Post />
-          </AuthLayout>
-        ),
-      },
+      })),
+      ...protectedRoutes.map((route) => ({
+        ...route,
+        element: <AuthLayout authentication={true}>{route.element}</AuthLayout>,
+      })),
     ],
   },
 ];
