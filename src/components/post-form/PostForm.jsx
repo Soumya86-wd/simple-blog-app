@@ -10,7 +10,7 @@ import RTE from "../RTE";
 
 import { service as appwriteService } from "../../appwrite";
 
-export default PostForm = ({ post }) => {
+const PostForm = ({ post }) => {
   const { register, handleSubmit, watch, setValue, getValues, control } =
     useForm({
       defaultValues: {
@@ -153,3 +153,5 @@ export default PostForm = ({ post }) => {
     </form>
   );
 };
+
+export default PostForm;

@@ -6,7 +6,6 @@ import { store } from "./store";
 import { routerStrategy } from "./routes";
 
 import "./index.css";
-import App from "./App.jsx";
 
 const router = createBrowserRouter(routerStrategy);
 

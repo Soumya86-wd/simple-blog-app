@@ -5,11 +5,15 @@ import { PostCard, Container } from "../components";
 
 function AllPosts() {
   const [posts, setPosts] = useState([]);
-  useEffect(async () => {
-    const retrievedPosts = await appwriteService.getActivePosts();
-    if (retrievedPosts) {
-      setPosts(retrievedPosts);
-    }
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const retrievedPosts = await appwriteService.getActivePosts();
+      if (retrievedPosts) {
+        setPosts(retrievedPosts);
+      }
+    };
+    fetchPosts();
   }, []);
 
   if (posts.length === 0) {

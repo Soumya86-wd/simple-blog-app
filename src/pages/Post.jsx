@@ -12,15 +12,19 @@ function Post() {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
 
-  useEffect(async () => {
-    if (slug) {
-      const retrievedPost = await appwriteService.getPostBySlug(slug);
-      if (retrievedPost) {
-        setPost(retrievedPost);
-      } else {
-        navigate("/");
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (slug) {
+        const retrievedPost = await appwriteService.getPostBySlug(slug);
+        if (retrievedPost) {
+          setPost(retrievedPost);
+        } else {
+          navigate("/");
+        }
       }
-    }
+    };
+
+    fetchPost();
   }, [slug, navigate]);
 
   const isAuthor = post && userData ? post.userId === userData.$id : false;

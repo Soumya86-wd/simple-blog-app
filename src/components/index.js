@@ -5,3 +5,5 @@ export { default as PostForm } from "./post-form/PostForm";
 export { default as PostCard } from "./PostCard";
 export { default as LoginComponent } from "./Login";
 export { default as SignupComponent } from "./Signup";
+export { default as Header } from "./Header/Header";
+export { default as Footer } from "./Footer/Footer";
