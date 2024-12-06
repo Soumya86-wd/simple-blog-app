@@ -1,0 +1,1 @@
+export { routerStrategy } from "./routes";

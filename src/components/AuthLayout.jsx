@@ -17,6 +17,7 @@ function Protected({ children, authentication = true }) {
   }, [authentication, authStatus, navigate]);
 
   return loader ? (
+    // display a loading spinner if currently in loading state
     <div className="flex items-center justify-center w-screen h-screen bg-gray-100">
       <div className="w-16 h-16 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
     </div>

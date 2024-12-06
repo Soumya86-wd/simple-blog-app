@@ -3,8 +3,8 @@ import conf from "../conf/conf";
 
 export class Service {
   client = new Client();
-  databases;
-  bucket;
+  databases; // for database operations
+  bucket; // for storage operations
 
   constructor() {
     this.client
@@ -14,7 +14,9 @@ export class Service {
     this.bucket = new Storage(client);
   }
 
-  async getPost(slug) {
+  // database services
+
+  async getPostBySlug(slug) {
     try {
       return await this.databases.getDocument(
         conf.appwriteDatabaseId,
@@ -79,7 +81,7 @@ export class Service {
     }
   }
 
-  async deletePost(slug) {
+  async deletePostBySlug(slug) {
     try {
       await this.databases.deleteDocument(
         conf.appwriteDatabaseId,
@@ -93,7 +95,7 @@ export class Service {
     }
   }
 
-  // storage service
+  // storage services
 
   async uploadFile(file) {
     try {
@@ -124,7 +126,7 @@ export class Service {
       return result.href;
     } catch (error) {
       console.error("Appwrite Service :: getFilePreview :: ", error);
-      return false;
+      return null;
     }
   }
 }

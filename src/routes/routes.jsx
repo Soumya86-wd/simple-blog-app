@@ -9,9 +9,9 @@ import {
 } from "../pages";
 
 import App from "../App";
-import AuthLayout from "../components/AuthLayout";
+import { AuthLayout } from "../components";
 
-export const router = [
+export const routerStrategy = [
   {
     path: "/",
     element: <App />,
