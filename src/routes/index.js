@@ -1,1 +1,1 @@
-export { routerStrategy } from "./routes";
+export { routerStrategy, generateNavItems } from "./routes";

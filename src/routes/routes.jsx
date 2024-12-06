@@ -12,23 +12,60 @@ import App from "../App";
 import { AuthLayout } from "../components";
 
 const protectedRoutes = [
-  { path: "all-posts", element: <AllPosts /> },
-  { path: "add-post", element: <AddPost /> },
-  { path: "edit-post/:slug", element: <EditPost /> },
-  { path: "post/:slug", element: <Post /> },
+  {
+    path: "all-posts",
+    element: <AllPosts />,
+    name: "All Posts",
+    inNavbar: true,
+  },
+  {
+    path: "add-post",
+    element: <AddPost />,
+    name: "Add Post",
+    inNavbar: true,
+  },
+  {
+    path: "edit-post/:slug",
+    element: <EditPost />,
+    name: "Edit Post",
+    inNavbar: false,
+  },
+  {
+    path: "post/:slug",
+    element: <Post />,
+    name: "View Post",
+    inNavbar: false,
+  },
 ];
 
 const openRoutes = [
-  { path: "login", element: <Login /> },
-  { path: "signup", element: <Signup /> },
+  {
+    path: "login",
+    element: <Login />,
+    name: "Login",
+    inNavbar: true,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
+    name: "Signup",
+    inNavbar: true,
+  },
 ];
+
+const homeRoute = {
+  index: true,
+  element: <Home />,
+  name: "Home",
+  inNavbar: true,
+};
 
 export const routerStrategy = [
   {
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Home /> },
+      homeRoute,
       ...openRoutes.map((route) => ({
         ...route,
         element: (
@@ -42,3 +79,17 @@ export const routerStrategy = [
     ],
   },
 ];
+
+export const generateNavItems = (authStatus) => {
+  const availableRoutes = [
+    homeRoute,
+    ...(authStatus ? protectedRoutes : openRoutes),
+  ];
+
+  return availableRoutes
+    .filter((route) => route.inNavbar)
+    .map((route) => ({
+      name: route.name,
+      endpoint: route.index ? "/" : `/${route.path}`,
+    }));
+};
